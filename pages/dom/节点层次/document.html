@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <section>
+        document的nodeType为9
+    </section>
+    <button onclick="changeTitle()">点击改变document.title</button>
+    <script>
+        function changeTitle(){
+            document.title = 'hello'
+        }
+        function writeDom(){
+            document.write(Date.now())
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>捕获与冒泡</title>
+    <style>
+        #box1 {
+            width: 200px;
+            height: 200px;
+            background: #065279;
+        }
+
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background: #c93756;
+        }
+
+        #box3 {
+            width: 50px;
+            height: 50px;
+            background: #808080;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="click me" onclick="alert(event.type)">
+
+    <div id="box1" onclick="show('box1')">
+        <div id="box2" onclick="show('box2')">
+            <div id="box3" onclick="show('box3')"></div>
+        </div>
+    </div>
+    <ul id="list">
+        <li id="1">1</li>
+        <li id="2">2</li>
+        <li id="3">3</li>
+    </ul>
+    <script>
+        function show(e) {
+            console.log(e)
+        }
+        document.querySelector('#box1').addEventListener('click', function () {
+            console.log('box1 捕获')
+        }, true)
+        document.querySelector('#box1').addEventListener('click', function () {
+            console.log('box1 冒泡')
+        }, false)
+        document.querySelector('#box1').addEventListener('click', function () {
+            console.log('box1 冒泡 extra')
+        }, false)
+        document.querySelector('#box2').addEventListener('click', function () {
+            console.log('box2 捕获')
+        }, true)
+        document.querySelector('#box2').addEventListener('click', function () {
+            console.log('box2 冒泡')
+        }, false)
+        document.querySelector('#box2').addEventListener('click', function () {
+            console.log('box2 冒泡 extra')
+        }, false)
+        document.querySelector('#box3').addEventListener('click', function () {
+            console.log('box3 捕获')
+        }, true)
+        document.querySelector('#box3').addEventListener('click', function (e) {
+            console.log('box3 冒泡')
+            // e.stopImmediatePropagation()//不会触发后面的extra
+            e.stopPropagation()
+        }, false)
+        document.querySelector('#box3').addEventListener('click', function () {
+            console.log('box3 冒泡 extra')
+        }, false)
+        document.querySelector('#list').addEventListener('click',function(e){
+            console.log('e===>',e.target.id)
+        })
+    </script>
+</body>
+
+</html>

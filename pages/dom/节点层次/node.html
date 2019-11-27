@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Node</title>
+    <style>
+        .desc {
+            color: #f8f8f8;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="desc">
+        这里ul,li的节点类型均为1,即为元素节点，而li中间的值，是TEXT_NODE，节点类型为3
+    </section>
+    <ul class="list">
+        <li>1</li>
+    </ul>
+    <button onclick="add()">点击添加节点</button>
+    <button onclick="addFirst()">点击在头上添加节点</button>
+    <button onclick="reset()">重置</button>
+    <!-- <a href="./document.html">点击跳转到document类型</a> -->
+    <script>
+        let type = document.querySelector('.list').nodeType
+        console.log('type===>', type)
+        let origin = num = 1
+         let listDom = document.querySelector('.list')
+        function add() {
+            num++
+            // let _text = `<li>${num}</li>`
+            // console.log('_text:', _text)
+            // document.querySelector('.list').appendChild(_text)
+            //这里错误的原因是，插入的节点需要是Node类型，而不是String
+            let dom = document.createElement('li')
+            dom.innerText = num
+            listDom.appendChild(dom)
+        }
+
+        function addFirst() {
+
+            origin--
+            let dom = document.createElement('li')
+            dom.innerText = origin
+           
+            listDom.insertBefore(dom,listDom.childNodes[0])
+        }
+
+        function reset() {
+            origin = num = 1
+            let _text = `<li>${num}</li>`
+            listDom.innerHTML = _text
+            // 这里直接改变list节点里面节点的值
+        }
+    </script>
+</body>
+
+</html>

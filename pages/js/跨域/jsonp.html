@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jsonp</title>
+</head>
+
+<body>
+    <script>
+        (function () {
+            let url = 'https://api.myjson.com/bins/12jvla'
+
+            function addScript(src) {
+                let _script = document.createElement('script')
+                _script.setAttribute('type', 'text/javascript')
+                _script.src = src
+                document.body.appendChild(_script)
+            }
+            window.onload = function() {
+                let _url = `${url}?callback=foo`
+                addScript(_url)
+            }
+
+            function foo(info) {
+                console.log('info==>', info)
+            }
+        }())
+    </script>
+</body>
+
+</html>

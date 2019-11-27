@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>简单上传</title>
+    <style>
+      #output img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="fileItem" accept=".png,.jpg,.gif,.jpeg" multiple type="file" />
+    <div id="output" style="width:250px;"></div>
+    <div id="progress"></div>
+
+    <script>
+      let filesList = document.getElementById("fileItem");
+      filesList.addEventListener("change", function(e) {
+        console.log("e===>", e.target.files);
+        let info = "",
+          output = document.querySelector("#output"),
+          progress = document.querySelector("#progress"),
+          files = e.target.files,
+          type = "default",
+          reader = new FileReader();
+        url = window.webkitURL.createObjectURL(files[0]);
+        console.log("url====>", url);
+        if (/image/.test(files[0].type)) {
+          reader.readAsDataURL(files[0]);
+          type = "text";
+        } else {
+          reader.readAsText(files[0]);
+          type = "text";
+        }
+        reader.onerror = function() {
+          output.innerHTML =
+            "could not read file,error code is" + reader.error.code;
+        };
+        reader.onprogress = function(e) {
+          if (e.lengthComputable) {
+            progress.innerHTML = e.loaded + "/" + event.total;
+          }
+        };
+        reader.onload = function() {
+          console.log("type==>", type);
+          let html = "";
+          switch (type) {
+            case "image":
+              html = `<img src="${reader.result}">`;
+              break;
+            case "text":
+              html = `<img src="${reader.result}">`;
+            //   html = reader.result;
+            default:
+              break;
+          }
+          output.innerHTML = html;
+        };
+      });
+    </script>
+  </body>
+</html>

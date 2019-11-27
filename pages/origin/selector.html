@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Selector</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 30px;
+            background: #f3f3f3;
+        }
+
+        #form2 {
+            margin: 30px 0;
+        }
+
+        #form2 input[type="radio"] {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            vertical-align: middle;
+            background: #fff;
+            border-radius: 50%;
+            border: 1px solid #f4bc00;
+            outline: none;
+        }
+        #form2 input[type="radio"]:checked {
+           background:#f4bc00;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="form1" action="">
+        <input name="sex" type="radio" checked value="male">男</input>
+        <input name="sex" type="radio" value="female">女</input>
+        <input name="sex" disabled type="radio" value="others">其它</input>
+    </form>
+
+    <div id="form2">
+        <input type="radio" checked name="country" value="china">中国
+        <input type="radio" name="country" value="japan">日本
+    </div>
+    <script>
+        // 获取表单一中性别的值
+        // checked 选定预选的值
+        let value = document.querySelector('#form1 input[type="radio"][name="sex"]:checked').value
+        console.log('value===>', value)
+
+        // 原生的问题
+        // 1.样式不好修改 2.只能点击圈圈，不能点击整体 3.动画效果做不了
+    </script>
+</body>
+
+</html>
+
+
+
+
+<!-- 这是注释
+    表单1 id:form1 原生radio
+
+ -->

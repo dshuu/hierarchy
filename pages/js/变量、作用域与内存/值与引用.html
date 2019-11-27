@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../assets/css/monokai-sublime.css">
+    <link rel="stylesheet" href="../../../assets/css/normalize.css">
+    <style>
+        #main {
+            max-width: 800px;
+            margin: 0 auto;
+            color: #808080;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <p>值的赋值是操作变量中实际的值:Undefined,Null,Boolean,Number,String这五种</p>
+        <pre>
+            <code class="javascript">
+                let num1 = 5
+                let num2 = num1
+                num1 = 6
+                console.log(num1)
+                console.log(num2)
+                //最终num1:6,num2:5
+            </code>
+        </pre>
+        <img src="./1.jpg" alt="值的赋值">
+
+        <p>引用数据类型:Object;引用的赋值，实际上是将该引用的指针赋予给变量，就像我们用的快递箱子。A去存了个东西在箱子里面，相应的给了把钥匙给A。
+            这个时候B复制了一个一模一样的钥匙，A把箱子里面东西改变后，B打开箱子拿到的也是改变后的东西。</p>
+        <pre>
+            <code class="javascript">
+                let obj1 = {a:5}
+                let obj2 = obj1
+                obj1.a = 6
+                console.log(obj1.a)
+                console.log(obj2.a)
+                //最终结果都是6,
+            </code>
+        </pre>
+        <img src="./2.jpg" alt="引用的赋值">
+        <p>对于引用类型值的传递，有个经典的问题在浅拷贝与深拷贝。</p>
+        <pre>
+            <code class="javascript">
+                //浅拷贝
+                let obj1 = {
+                    info:{
+                        a:2
+                    },
+                    n:1
+                }
+                let obj2 = Object.assign({},obj1)
+                obj1.info.a = 3
+                obj1.n = 0
+                //这个时候我们发现obj2.n == 1;obj2.info.a ==3。
+                //这是因为，浅复制只会复制第一层，而更加深层次的引用，还是同一个钥匙。
+            </code>
+        </pre>
+        <pre>
+            <code class="javascript">
+                //深拷贝,其实就是递归讲每一层的值赋值给新的对象
+                let obj1 = {
+                    info:{
+                        a:2
+                    },
+                    n:1
+                }
+                function deepClone(obj){
+                    let newObj = Array.isArray(obj)?[]:{}
+                    //数组也是对象的一种
+                    Object.keys(obj).forEach(key=>{
+                        if( typeof obj[key] === 'object'){
+                            newObj[key] = deepClone(obj[key])
+                        }else{
+                            newObj[key] = obj[key]
+                        }
+                    })
+                    return newObj
+                }
+                let obj2 = deepClone(obj1)
+                obj1.info.a = 3
+                obj1.n = 0
+                //这个时候我们发现obj2已经不根据obj1的变化而变化了。
+                <!-- 最简单的深复制方式是让引用类型变成值类型，再变回引用类型
+                    不过JSON.stringify()只能序列化对象的可枚举的自有属性，并且日期对象会转换成字符串，
+                    函数，undefined会丢失，所以只能用于一些简单的
+                 -->
+                let obj3 = JSON.parse(JSON.stringify(obj1))
+            </code>
+        </pre>
+    </div>
+    <script src="../../../assets/js/highlight.pack.js"></script>
+    <script>
+        // hljs.initHighlightingOnLoad();
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+</body>
+
+</html>

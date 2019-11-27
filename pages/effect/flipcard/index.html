@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flipcard</title>
+    <style>
+        .tc{
+            text-align: center;
+        }
+        .flipcard{
+            width: 280px;
+            height: 280px;
+            margin: 0 auto;
+            background-image: linear-gradient(135deg, #6bcbdd, #3797d1 60%, #3860a1);
+            transition: .5s;
+        }
+        .flipcard:hover{
+            transform: rotateY(180deg);
+        }
+        .flipcard_font{
+           display: none;
+        }
+        .flipcard_back{
+           /* display: none; */
+        }
+    </style>
+</head>
+<body>
+    <div class="flipcard">
+        <div class="flipcard_font">font</div>
+        <div class="flipcard_back tc">back</div>
+    </div>
+</body>
+</html>

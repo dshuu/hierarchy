@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS 盒子模型</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%;
+            background-color: #cbe0ec;
+        }
+
+        .tc {
+            text-align: center;
+        }
+
+        .box-container {
+            background: #f1f1f1;
+            width: 400px;
+            height: 300px;
+            margin: 20px auto;
+        }
+
+        .inner-container {
+            padding: 20px;
+            background: #aaabaa;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="tc">CSS 盒子模型</h1>
+    <div class="box-container">
+        <div class="inner-container">
+            inner container
+        </div>
+        <div class="inner-container">
+            inner container
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>懒加载</title>
+    <style>
+        .lazy{
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" width="100%">
+        <img class="lazy" src="../../assets/images/blank.gif" data-echo="../../assets/images/1.jpg">
+        <img class="lazy" src="../../assets/images/blank.gif" data-echo="../../assets/images/2.jpg">
+        <img class="lazy" src="../../assets/images/blank.gif" data-echo="../../assets/images/3.jpg">
+        <img class="lazy" src="../../assets/images/blank.gif" data-echo="../../assets/images/4.jpg">
+        <img class="lazy" src="../../assets/images/blank.gif" data-echo="../../assets/images/5.jpg">
+    </div>
+    <script src="../js/plugins/echo.js"></script>
+    <script>
+        // 当判断图片元素移动到可视区域中的时候，先加载loading图片，再加载资源图片
+        Echo.init({
+            offset: 0,
+            throttle: 0
+        })
+    </script>
+</body>
+
+</html>

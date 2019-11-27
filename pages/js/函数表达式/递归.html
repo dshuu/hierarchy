@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>递归</title>
+</head>
+
+<body>
+    <script>
+        function factorial(num) {
+            if (num <= 1) {
+                return 1
+            }
+            return num * arguments.callee(num - 1) //获取调用参数的函数
+        }
+        let newFactorial = factorial
+    </script>
+    <script>
+        'use strict'
+        let factorial1 = function f(num) {
+            if (num <= 1) {
+                return 1
+            }
+            return num * f(num - 1) //获取调用参数的函数
+        }
+        let newFactorial1 = factorial1
+    </script>
+</body>
+
+</html>

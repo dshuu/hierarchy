@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EventBus</title>
+</head>
+
+<body>
+    <button class="btn" onclick="emit()">btn</button>
+    <script src="./eventBus.js"></script>
+    <script>
+        const EventBus = new EventBusClass()
+        EventBus.on('first-event',msg=>{
+            console.log(`msg:${msg}`)
+        })
+        EventBus.one('first-event',msg=>{
+            console.log(`msg:${msg}====>`)
+        })
+        function emit(){
+            EventBus.emit('first-event','345')
+        }
+
+    </script>
+</body>
+
+</html>

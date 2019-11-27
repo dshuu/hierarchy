@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DocumentFragment类型</title>
+</head>
+
+<body>
+    <p>节点类型为10，理解为文档碎片，在Vue源码中，通过文档碎片统一处理dom。往里面添加文档节点时候，会从文档树上移除节点。</p>
+    <p>m1区域</p>
+    <div class="m1">
+        <div class="m2">m2</div>
+        <div class="m3">m3</div>
+    </div>
+    <p>m4区域,3秒后会转移过来</p>
+    <div class="m4"></div>
+    <script>
+        setTimeout(() => {
+            let $fragment = document.createDocumentFragment()
+            let dom = document.querySelector('.m1')
+            Array.from(dom.childNodes).forEach(k => {
+                $fragment.appendChild(k)
+            })
+            document.querySelector('.m4').appendChild($fragment)
+        }, 3000);
+    </script>
+</body>
+
+</html>

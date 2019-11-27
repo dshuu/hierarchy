@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>三兄弟都是为了改变函数运行时上下文存在的,不多说，开撸</p>
+    <script>
+        let lm = {
+            name: 'lm',
+            sayHi() {
+                console.log(`${this.name} say hi`)
+                console.log(...arguments)
+            }
+        }
+        let hmm = {
+            name: 'hmm'
+        }
+        // lm.sayHi.call(hmm, '1', '2')
+        // lm.sayHi.apply(hmm, ['1', '2'])
+        // lm.sayHi.bind(hmm)('1', '2') //bind不会立刻执行,call apply两兄弟都会
+
+        Function.prototype.myCall = function (ctx = window) {
+            ctx.fn = this
+            let args = Array.from(arguments).slice(1)
+            let res = arguments.length > 1 ? ctx.fn(...args) : ctx.fn()
+            delete ctx.fn
+            return res
+        }
+        lm.sayHi.myCall(hmm, '1', '2')
+        Function.prototype.myApply = function (ctx = window) {
+            ctx.fn = this
+            let res = arguments.length > 1 ? ctx.fn(...arguments[1]) : ctx.fn()
+            delete ctx.fn
+            return res
+        }
+        lm.sayHi.myApply(hmm, ['1', '2'])
+        // bind函数是需要返回一个函数
+        Function.prototype.myBind = function (context) {
+            let ctx = JSON.parse(JSON.stringify(context)) || window
+            ctx.fn = this
+            let args = Array.from(arguments).slice(1)
+            return function () {
+                let allArgs = args.concat(Array.from(arguments))
+                return allArgs.length > 0 ? ctx.fn(...allArgs) : ctx.fn()
+            }
+        }
+        lm.sayHi.myBind(hmm, 1, 2)('1', '2')
+    </script>
+</body>
+
+</html>

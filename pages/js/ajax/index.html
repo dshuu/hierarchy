@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原生AJAX</title>
+</head>
+
+<body>
+    <button name="set" onclick="setInfo()"> click me to set!</button>
+    <div class="infoSet">here is the info id!</div>
+    <br>
+    <button name="get" onclick="getInfo()"> click me to get!</button>
+    <div class="infoGet">here is the info!</div>
+
+    <button name="sync" onclick="getInfoSync()"> click me to sync get!</button>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <script src="./axios.js"></script>
+    <script>
+        let apiHost = 'https://api.myjson.com/bins',
+            getUrl
+
+        function getInfo() {
+            if (!getUrl) {
+                return alert('先要存才能取')
+            }
+            return new Promise((res, rej) => {
+                axios({
+                    url: getUrl,
+                }).then(resp => {
+                    console.log('get resp===>', resp)
+                    return res(resp)
+                })
+            })
+        }
+
+        function setInfo() {
+            axios({
+                url: 'https://api.myjson.com/bins',
+                method: 'post',
+                data: {
+                    info: 'hello myjson',
+                    ts: Date.now()
+                }
+            }).then(resp => {
+                console.log('set resp==>', resp)
+                document.querySelector('.infoSet').innerHTML = resp.uri
+                getUrl = resp.uri
+            })
+        }
+
+        async function getInfoSync() {
+            let info = await getInfo()
+            console.log('info===>', info)
+            document.querySelector('.infoGet').innerHTML = info.info
+        }
+    </script>
+</body>
+
+</html>

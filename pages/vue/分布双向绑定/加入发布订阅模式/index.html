@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="mvvm-container">
+        <p>a:{{ a }}</p>
+        <p>b.title:{{ b.title }}</p>
+        <p>{{ hello }}</p>
+        <input type="text" v-model="a">
+    </div>
+    <script src='./watcher.js'></script>
+    <script src="./observe.js"></script>
+    <script src='./compile.js'></script>
+    <script src="./mvvm.js"></script>
+    <script>
+        let myvue = new MVVM({
+            el: '#mvvm-container',
+            data: {
+                a: 1,
+                b: {
+                    title: 'hello '
+                }
+            },
+            computed: {
+                hello() {
+                    return this.b.title + 'world'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

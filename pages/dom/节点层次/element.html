@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>element</title>
+</head>
+
+<body>
+    <section>Element类型，节点类型为1，nodeValue值为null</section>
+    <div id="box" class="c1 c2 c3" myAttr="hi" lang="en" dir="rtl" title="div box">hello</div>
+    <section>id为box的div，可以获取到其中的attributes属性，在浏览器上会自动转换为小写</section>
+    <section>使用attributes得到一个类数组，其中每个元素都是键值对的组合
+        <pre>
+            比如document.querySelector('#box').attributes['id'].name == 'id'
+            document.querySelector('#box').attributes['id'].value == 'box'
+        </pre>
+        <pre>
+            使用document.createElement('div')可以创建一个新的div元素，在前面appendChild中用到过。
+        </pre>
+    </section>
+    <script>
+
+    </script>
+</body>
+
+</html>

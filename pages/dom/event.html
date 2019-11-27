@@ -1,0 +1,78 @@
+<!-- 事件 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document Event</title>
+    <style>
+        #box1 {
+            width: 200px;
+            height: 200px;
+            margin: 15px auto;
+            background: #065279;
+        }
+
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background: #db5a6b;
+        }
+
+        #box3 {
+            width: 50px;
+            height: 50px;
+            background: #ccc;
+        }
+        .border_input{
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <!-- <p>JS事件流包括:事件捕获阶段，处于目标阶段，时间冒泡阶段</p> -->
+        <div id="box1" onclick="console.log('on click event1===>')">
+            <div id="box2" onclick="console.log('on click event2===>')">
+                <div id="box3" onclick="console.log('on click event3===>')"></div>
+            </div>
+        </div>
+    </section>
+    <form action="">
+        <input type="text" class="border_input" value="123" name="username">
+        <input type="button" value='click me' onClick="showThis()" />
+    </form>
+
+    <script>
+        // 事件流
+        (function () {
+            document.querySelector('#box1').addEventListener('click', function (event) {
+                console.log('box1 capture')
+            }, true)
+            document.querySelector('#box1').addEventListener('click', function () {
+                console.log('box1 bubble')
+            }, false)
+            document.querySelector('#box2').addEventListener('click', function () {
+                console.log('box2 capture')
+            }, true)
+            document.querySelector('#box2').addEventListener('click', function () {
+                console.log('box2 bubble')
+            }, false)
+            document.querySelector('#box3').addEventListener('click', function () {
+                console.log('box3 capture')
+            }, true)
+            document.querySelector('#box3').addEventListener('click', function () {
+                console.log('box3 bubble')
+            }, false)
+        }());
+
+        function showThis() {
+            console.log('this===>', event)
+        }
+    </script>
+</body>
+
+</html>

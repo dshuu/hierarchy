@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {number[]} nums
+         * @param {number} target
+         * @return {number[]}
+         */
+        function f(nums, target) {
+            let i1, i2,exist=false
+            nums.forEach((item, index) => {
+                let _nums = JSON.parse(JSON.stringify(nums))
+                // _nums.splice(index, 1)
+                _nums.forEach((item1,index1) => {
+                    if (item + item1 === target && index1 != index && !exist) {
+                        i1 = index,
+                        i2 = index1
+                        exist = true
+                        console.log('i1,i2==>',i1,i2,item,item1)
+                    }
+                })
+            })
+            if (exist) {
+                return [i1, i2]
+            }else{
+                return null
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Transition</title>
+    <style>
+        body {
+            margin: 30px;
+        }
+
+        .desc {
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background: #426666;
+            text-align: center;
+            line-height: 100px;
+            color: #88ada6;
+
+        }
+
+        .box1 {
+            transition: width 2s;
+        }
+        .box1:hover {
+            width: 200px;
+        }
+        .box2{
+            transition: width 2s, height 2s,transform 2s;
+        }
+        .box2:hover {
+            width: 200px;
+            height: 150px;
+            transform: scale(0.8)
+        }
+    </style>
+</head>
+
+<body>
+    <p>过渡transition效果，是元素从一种样式转换成另一种样式时候的效果，需要设置css属性与时长</p>
+    <div class="desc">
+        设置width上的transition属性
+        <div class="box box1">box1</div>
+    </div>
+    <div class="desc">
+        设置width上的transition属性
+        <div class="box box2">box2</div>
+    </div>
+</body>
+
+</html>

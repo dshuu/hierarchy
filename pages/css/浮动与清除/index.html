@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>浮动与清除方式</title>
+    <style>
+        .wrapper {
+            border: 1px solid #ccc;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            background: #f4bc00;
+            color: #fff;
+        }
+
+        .box2 {
+            background: #2e2e2e;
+        }
+
+        /* .clearfix{
+            height: 1%;
+        }
+        .clearfix::after{
+            display: block;
+            content: '.';
+            height: 0;
+            visibility: hidden;
+            clear: both;
+        } */
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden
+        }
+
+        .clearfix {
+            height: 1%;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        浮动可以让元素脱离文档布局流，吸附到父容器边上，同时该元素之下的内容，会围绕浮动元素，填满其它空间。清楚浮动的基本原理，就是讲父元素撑开，或者在需要清楚地地方，加上clear:both;
+    </section>
+    <div class="wrapper clearfix">
+        <div class="fl box">box1</div>
+        <div class="fr box box2">box2</div>
+        Across The GreatWall,we can reach every cornor in the world！
+    </div>
+    <div class="nextLine">
+        nextLine content
+    </div>
+</body>
+
+</html>

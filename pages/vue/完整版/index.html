@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Infinite</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{ title }}</p>
+        <p>{{ info.name }}</p>
+        <p>{{ cp }}</p>
+        <p>{{ cp1 }}</p>
+        <input type="text" v-model="title">
+    </div>
+    <script src='./watcher.js'></script>
+    <script src="./compile.js"></script>
+    <script src="./vue.js"></script>
+    <script>
+        let vue = new Vue({
+            el: '#app',
+            data: {
+                title: 'hello Vue',
+                info: {
+                    name: 'dshu'
+                }
+            },
+            computed: {
+                cp() {
+                    return this.title + ' yeah'
+                },
+                cp1:{
+                    get(){
+                        return this.title + 'yeah 1'
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
