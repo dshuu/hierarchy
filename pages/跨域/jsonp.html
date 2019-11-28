@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>JSONP实例</title>
+  </head>
+  <body>
+    <h1>测试JSONP</h1>
+    <div id="info"></div>
+    <script>
+      let script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.src = 'http://127.0.0.1:7001/ping?callback=handleResp'
+      /**
+       * 注意这边需要后端返回 `${cb}(data)`,相当于在script中调用cb(data)
+      */
+      document.body.appendChild(script, document.body.lastChild)
+      function handleResp(resp) {
+        console.log('script==>', script)
+        console.log('cb===>', JSON.stringify(resp))
+        document.querySelector('#info').innerHTML = 'get data from jsonp' + JSON.stringify(resp)
+      }
+    </script>
+    <!-- <script>
+      handleResp({ name: 'Monkey' })
+    </script> -->
+  </body>
+</html>
