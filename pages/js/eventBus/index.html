@@ -16,7 +16,7 @@
         EventBus.on('first-event',msg=>{
             console.log(`msg:${msg}`)
         })
-        EventBus.one('first-event',msg=>{
+        EventBus.on('first-event',msg=>{
             console.log(`msg:${msg}====>`)
         })
         function emit(){
