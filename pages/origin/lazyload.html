@@ -15,18 +15,23 @@
 
 <body>
     <div class="container" width="100%">
-        <img class="lazy" src="../../assets/images/blank.gif" data-echo="../../assets/images/1.jpg">
-        <img class="lazy" src="../../assets/images/blank.gif" data-echo="../../assets/images/2.jpg">
-        <img class="lazy" src="../../assets/images/blank.gif" data-echo="../../assets/images/3.jpg">
-        <img class="lazy" src="../../assets/images/blank.gif" data-echo="../../assets/images/4.jpg">
-        <img class="lazy" src="../../assets/images/blank.gif" data-echo="../../assets/images/5.jpg">
+        <img class="lazy" src="../../assets/images/blank.gif" data-lazysrc="../../assets/images/1.jpg">
+        <img class="lazy" src="../../assets/images/blank.gif" data-lazysrc="../../assets/images/2.jpg">
+        <img class="lazy" src="../../assets/images/blank.gif" data-lazysrc="../../assets/images/3.jpg">
+        <img class="lazy" src="../../assets/images/blank.gif" data-lazysrc="../../assets/images/4.jpg">
+        <img class="lazy" src="../../assets/images/blank.gif" data-lazysrc="../../assets/images/5.jpg">
     </div>
-    <script src="../js/plugins/echo.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+    <!-- <script src="../js/plugins/echo.js"></script> -->
+    <script src="../jquery源码解析/插件/lazyload.js" defer></script>
     <script>
         // 当判断图片元素移动到可视区域中的时候，先加载loading图片，再加载资源图片
-        Echo.init({
-            offset: 0,
-            throttle: 0
+        // Echo.init({
+        //     offset: 0,
+        //     throttle: 0
+        // })
+        $(document).ready(function(){
+            $().lazyload()
         })
     </script>
 </body>

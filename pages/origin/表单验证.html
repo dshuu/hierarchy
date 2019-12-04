@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>表单验证</title>
+    <style>
+      form div {
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+  <form action="" id="form">
+    <div>
+      输入邮箱
+      <input type="text" data-type="email" name="email" />
+    </div>
+    <div>
+      输入手机号码
+      <input type="text" data-type="phone" name="phone" />
+    </div>
+    <div>
+      输入身份证
+      <input id="idf" type="text" data-type="identifier" name="identifier" />
+    </div>
+    <div>
+      输入描述(3,8)
+      <input type="text" id="u1" data-min="3" data-max="8" name="age" />
+    </div>
+  </form>
+  <body>
+    <div class="container" width="100%"></div>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+    <script src="../jquery源码解析/插件/validate.1.js"></script>
+    <script>
+      $(document).ready(function() {})
+      $('form').validate({
+        defaultEvent: 'blur'
+      })
+    </script>
+  </body>
+</html>
