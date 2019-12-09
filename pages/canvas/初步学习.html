@@ -5,16 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Canvas</title>
+    <style>
+      canvas {
+        border: 1px solid #ccc;
+      }
+    </style>
   </head>
   <body>
     <canvas id="tutorial"></canvas>
+    <canvas id="tutorial1"></canvas>
+    <canvas id="tutorial2"></canvas>
+    <canvas id="tutorial3"></canvas>
+    <canvas id="tutorial4"></canvas>
     <script>
-      let canvas = document.querySelector("#tutorial");
-      let ctx = canvas.getContext("2d");
-      ctx.fillStyle = "rgba(200,0,0)";
-      ctx.fillRect = (10, 10, 55, 50);
-      ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
-      ctx.fillRect(30, 30, 55, 50);
+      ;(function() {
+        function draw() {
+          let canvas = document.querySelector('#tutorial')
+          let ctx = canvas.getContext('2d')
+          ctx.fillStyle = 'rgba(200,0,0)'
+          ctx.fillRect(10, 10, 55, 50)
+          ctx.fillStyle = 'rgba(0, 0, 200, 0.5)'
+          ctx.fillRect(30, 30, 55, 50)
+        }
+        draw()
+        function draw1() {
+          let canvas = document.querySelector('#tutorial1')
+          let ctx = canvas.getContext('2d')
+          ctx.beginPath()
+          ctx.arc(75, 75, 50, 0, Math.PI * 2, true) // 绘制
+          ctx.moveTo(110, 75)
+          ctx.arc(75, 75, 35, 0, Math.PI, false) // 口(顺时针)
+          ctx.moveTo(65, 65)
+          ctx.arc(60, 65, 5, 0, Math.PI * 2, true) // 左眼
+          ctx.moveTo(95, 65)
+          ctx.arc(90, 65, 5, 0, Math.PI * 2, true) // 右眼
+          ctx.stroke()
+        }
+        draw1()
+        function draw2() {
+          let canvas = document.querySelector('#tutorial2')
+          let ctx = canvas.getContext('2d')
+          ctx.beginPath()
+          ctx.moveTo(25, 25)
+          ctx.lineTo(105, 25)
+          ctx.lineTo(25, 105)
+          ctx.fill()
+          ctx.beginPath()
+          ctx.moveTo(125, 125)
+          ctx.lineTo(125, 45)
+          ctx.lineTo(45, 125)
+          ctx.closePath() //stroke方法需要closePath
+          ctx.stroke()
+        }
+        draw2()
+        ;(function() {
+          let canvas = document.querySelector('#tutorial3')
+          let ctx = canvas.getContext('2d')
+          ctx.font = '40px serif'
+          ctx.textBaseline = 'hanging'
+          ctx.strokeText('hello world', 0, 100)
+        })()
+        ;(function() {
+          let canvas = document.querySelector('#tutorial4')
+          let ctx = canvas.getContext('2d')
+          let img = new Image()
+          
+          img.onload = function() {
+            console.log('img===>',img)
+            ctx.drawImage(img, 0, 0, canvas.width, (canvas.width * img.height) / img.width)
+          }
+          img.src = '../../assets/images/2.jpg'
+          
+        })()
+      })()
     </script>
   </body>
 </html>
