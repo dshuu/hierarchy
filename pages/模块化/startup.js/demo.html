@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script data-main="common/js" src="startUp.js"></script>
+    <script>
+      let _path = '',
+        arr = Array.from(document.scripts)
+      arr.forEach(item => {
+        if (item.dataset.main && /startup\.js/.test(item.src)) {
+          _path = item.dataset.main
+        }
+      })
+      if (_path) {
+        startUp.config({
+          base: 'common/js'
+        })
+      }
+    </script>
+  </body>
+</html>
