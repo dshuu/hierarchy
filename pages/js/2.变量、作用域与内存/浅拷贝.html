@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>因为对象是引用类型，如果两个变量复制的是同一个指针，两者将同时变化，所以我们希望赋值的时候，是新的引用指针</p>
+
+    <script>
+     
+      let a = (b = {
+        name: 'nico'
+      })
+      let c = Object.assign({}, a)
+      let d = { ...a }
+      a.name = 'nico1'
+
+      console.log(b)
+      console.log(c)
+      console.log(d)
+
+
+      // 浅拷贝只是解决了第一层的问题，如果层级很深，需要使用到深拷贝
+    </script>
+  </body>
+</html>

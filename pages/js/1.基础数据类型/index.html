@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let a = 1,
+        b = undefined,
+        c = null,
+        d = 'hello',
+        e = true,
+        f = {},
+        g = Symbol('a')
+      console.log(typeof a) // 'number'
+      console.log(typeof b) // 'undefined'
+      console.log(typeof c) // 'object'
+      console.log(typeof d) // 'string'
+      console.log(typeof e) // 'boolean'
+      console.log(typeof f) // 'object'
+      console.log(typeof g) // 'symbol'
+      // 判断类型
+      function isType(s, type) {
+        return Object.prototype.toString.call(s) == `[object ${type}]`
+      }
+      Array.prototype.isArray = function() {
+        this.toString = ()=>{console.log('123')}
+        Object.prototype.toString.call(this) == '[object Array]'
+      }
+    </script>
+  </body>
+</html>

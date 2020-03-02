@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <p>结论:函数的传参是通过值传递，而不是引用，这个值其实可以看做是堆的指针</p>
+
+  <script>
+    function setName(obj){
+      obj.name = 'nicolas'
+    }
+    let person = new Object()
+    setName(person)
+    console.log(person.name)
+
+
+    function setName1(obj){
+      this.a = '123'
+      obj.name = 'nicolas'
+      obj = new Object()
+      obj.name = 'ccc'
+    }
+    let person1 = new Object()
+    setName1(person1)
+    console.log(person1.name)
+  </script>
+</body>
+</html>
