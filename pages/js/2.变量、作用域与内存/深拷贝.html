@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>深拷贝</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>深拷贝</title>
+  </head>
+  <body>
     <p>Object层级很深的时候，需要用到深拷贝</p>
-</body>
+    <script>
+      let cloneDeep = (obj, cache = []) => {
+        if (obj === null || typeof obj !== 'object') {
+          return obj
+        }
+        // 如果传入的对象与缓存的相等，递归结束，防止循环
+        // var a = {b:1}
+        // a.c=a
+
+        let hit = cache.filter(c => c.original === obj)[0]
+        if (hit) {
+          return hit.copy
+        }
+        
+        let copy = Array.isArray(obj) ? [] : {}
+        cache.push({
+          original: obj,
+          copy
+        })
+        Object.keys(obj).forEach(key => {
+          copy[key] = cloneDeep(obj[key], cache)
+        })
+        return copy
+      }
+    </script>
+  </body>
 </html>
