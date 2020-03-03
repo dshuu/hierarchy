@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>手动打call</p>
+    <script>
+      var a = 3
+      let obj = {
+        a: 2
+      }
+      let fn = function() {
+        console.log(this.a)
+        console.log('arguments==>', arguments)
+      }
+      fn()
+      // let fn1 = () => {
+      //   console.log(this.a)
+      // }
+      fn.call(obj, 1, 2, 3)
+      // fn1.call(obj) //箭头函数this一旦绑定,不会改变
+
+      Function.prototype.myCall = function(ctx = window) {
+        if (typeof this != 'function') {
+          return new Error('Function required')
+        }
+        ctx.fn = this
+        let args = [...arguments].slice(1) //类数组转换
+        let res = args.length ? ctx.fn(...args) : ctx.fn()
+        delete ctx.fn
+        return res
+      }
+      fn.myCall(obj)
+    </script>
+  </body>
+</html>

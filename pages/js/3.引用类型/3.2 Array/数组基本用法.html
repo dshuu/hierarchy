@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>记住数组的栈特典，last-in-first-out</p>
+    <ul>
+      <li>
+        pop:出栈，改变原数组
+      </li>
+      <li>
+        push:入栈，改变原数组，返回新数组的长度
+      </li>
+      <li>
+        shift:反向出栈,改变原数组,返回出栈的值
+      </li>
+      <li>
+        unshift:反向入栈,改变原数组，返回新数组的长度
+      </li>
+      <li>
+        slice(startIndex,endIndex-1),不改变原数组，返回截取的数组,左包含，右边不包含(lastIndex-1)
+      </li>
+      <li>
+        splice(startIndex,deleteCount,joinItem) 返回空数组，影响原数组
+      </li>
+    </ul>
+    <p>在js中，arguments,dom树都可能是类数组，可以通过转换维数组的方式</p>
+    <script>
+      // 类数组转换的四种方法，
+      function toArray(arrayLike) {
+        return [].slice.call(arrayLike, 0)
+        return [...arrayLike]
+        return Array.from(arrayLike)
+        let arr = []
+        for (let i = 0; i < arrayLike.length; i++) {
+          arr.push(arrayLike[i])
+        }
+        return arr
+      }
+    </script>
+  </body>
+</html>

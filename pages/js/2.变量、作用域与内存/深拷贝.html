@@ -9,6 +9,16 @@
   <body>
     <p>Object层级很深的时候，需要用到深拷贝</p>
     <script>
+      let o = {
+        k: 'k',
+        a: {
+          b: {
+            name: 'd'
+          }
+        }
+      }
+      o.c = o
+
       let cloneDeep = (obj, cache = []) => {
         if (obj === null || typeof obj !== 'object') {
           return obj
@@ -21,7 +31,7 @@
         if (hit) {
           return hit.copy
         }
-        
+
         let copy = Array.isArray(obj) ? [] : {}
         cache.push({
           original: obj,
@@ -32,6 +42,42 @@
         })
         return copy
       }
+    </script>
+
+    <script>
+      let deepCopy = (obj, cache = []) => {
+        if (typeof obj === null || typeof obj !== 'object') {
+          return obj
+        }
+        let hit = cache.filter(c=>c.original === obj)[0]
+        if(hit){
+          return hit.newObj
+        }
+        let newObj = Array.isArray(obj) ? [] : {}
+        cache.push({
+          original: obj,
+          newObj
+        })
+        Object.keys(obj).forEach(key => {
+          if (obj[key] && typeof obj[key] == 'object') {
+            newObj[key] = deepCopy(obj[key],cache)
+          } else {
+            newObj[key] = obj[key]
+          }
+        })
+        return newObj
+      }
+    </script>
+
+    <script>
+      let cv = cloneDeep(o)
+      let dv = deepCopy(o)
+      console.log('cloneDeep===>', cv)
+      console.log('deepCopy===>', dv)
+      o.k = 'ok'
+      console.log('o==>',o)
+      console.log('cloneDeep===>', cv)
+      console.log('deepCopy===>', dv)
     </script>
   </body>
 </html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>工厂模式抽象了创建对象的过程，可以大量制造，没有解决对象识别的问题(怎么知道一个对象的类型)</p>
+    <script>
+      function F(name) {
+        let o = new Object()
+        o.name = name
+        o.sayHi = function() {
+          console.log(`${this.name} say hi`)
+          // return 1
+        }
+        return o
+      }
+      let l = new F('lm')
+      let k = new F('ki')
+      console.log(l)
+      console.log(l.sayHi())
+      console.log(k)
+      console.log(k.sayHi())
+    </script>
+  </body>
+</html>

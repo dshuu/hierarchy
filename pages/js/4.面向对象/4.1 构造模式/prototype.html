@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <p>单独使用原型模式，共有属性如果修改，将全部修改，引用类型也是</p>
+  <script>
+    function F(name){
+      this.name = name
+    }
+    F.prototype.sayHi = function(){
+      console.log(`${this.name} say hi`)
+    }
+    F.prototype.a = 'a'
+    let l = new F('lm')
+    l.sayHi()
+    // 这里要注意，for in可枚举圆形脸上的属性,Object.keys不会枚举非当前实例的属性
+    console.log(Object.keys(l))
+    for(let i in l ){
+      if(l.hasOwnProperty(i)){
+        console.log(i)
+      }
+    }
+  </script>
+</body>
+</html>

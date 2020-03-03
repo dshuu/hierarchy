@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <p>构造模式解决了来源问题，但是大量每次调用都会生成一个新的函数</p>
+  <script>
+    function F(name){
+      this.name = name
+      this.sayHi = function(){
+        console.log(`${this.name} say hi`)
+      }
+    }
+    let l = new F('lm')
+    l.sayHi()
+  </script>
+</body>
+</html>

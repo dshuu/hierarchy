@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>js中this到底指向哪里</p>
+    <p>可以通过call,apply,bind改变this的指向</p>
+    <script>
+      // this总是指向函数的直接调用者（而非间接调用者）
+      function foo() {
+        console.log(this.a)
+      }
+      var a = 1
+      foo()
+      var obj = {
+        a: 2,
+        foo
+      }
+      obj.foo()
+
+      var c = new foo()
+      c.a = 3
+      console.log(c.a)
+
+      function ac() {
+        return () => {
+          return () => {
+            console.log(this)
+          }
+        }
+      }
+      ac()()()//Window
+    </script>
+  </body>
+</html>

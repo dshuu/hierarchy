@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>new的过程经过了什么</p>
+    <ol>
+      <li>创建一个空的简单对象</li>
+      <li>设置该对象的构造函数到另一对象</li>
+      <li>将1中创建的对象作为this的上下文</li>
+      <li>如果该函数没有返回对象，返回this</li>
+    </ol>
+    <script>
+      function Person(name) {
+        this.name = name
+      }
+      let f = new Person('xm')
+      console.log(f)
+      function N(f) {
+        return function() {
+          let o = {}
+          o.__proto__ = f.prototype
+          f.apply(o, [...arguments])
+          return o
+        }
+      }
+      let k = N(Person)('k')
+      console.log(k)
+
+      function Ne(P) {
+        return function() {
+          let obj = {}
+          obj.__proto__ = P.prototype
+          P.apply(obj,[...arguments])
+          return obj
+        }
+      }
+      console.log(Ne(Person)('mm'))
+    </script>
+  </body>
+</html>

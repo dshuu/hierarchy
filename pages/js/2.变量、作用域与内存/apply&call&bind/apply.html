@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>防止混淆的话，记住[a]pply对应array</p>
+    <script>
+      var a = 3
+      let obj = {
+        a: 2
+      }
+      let fn = function() {
+        console.log(this.a)
+        console.log('arguments==>', arguments)
+      }
+      fn()
+      // let fn1 = () => {
+      //   console.log(this.a)
+      // }
+      fn.apply(obj, [1, 2, 3])
+      Function.prototype.myApply = function(ctx = window) {
+        if (typeof this !== 'function') {
+          return new Error('Function required')
+        }
+        ctx.fn = this
+        let args = [...arguments].slice(1)[0]
+        let res = args.length ? ctx.fn(...args) : ctx.fn()
+        delete ctx.fn
+        return res
+      }
+      fn.myApply(obj, [1, 2, 3])
+    </script>
+  </body>
+</html>

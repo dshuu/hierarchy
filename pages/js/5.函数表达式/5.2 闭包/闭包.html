@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Closure</title>
+  </head>
+
+  <body>
+    <script>
+      // 1.闭包是封闭外部环境变量
+      // 2.内部函数在调用时，会自动获得this和arguments,只会搜索到活动对象为止
+      // 3.使用匿名函数可以解决js没有块级作用域的问题
+      let a = 123
+
+      function f() {
+        let a = 456
+
+        function fn() {
+          return a
+        }
+        return fn
+      }
+      console.log(f()())
+
+      var name = 'The Window'
+
+      var object = {
+        name: 'My Object',
+
+        getNameFunc: function() {
+          console.log('this===>', this)
+          let that = this
+          return function() {
+            console.log('that->', that)
+            console.log('this-->', this)
+            return this.name
+          }
+        }
+      }
+
+      console.log(object.getNameFunc()())
+    </script>
+  </body>
+</html>

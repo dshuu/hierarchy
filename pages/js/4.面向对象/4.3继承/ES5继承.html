@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <script>
+      function Parent(name, age) {
+        this.name = name
+        this.age = age
+      }
+      Parent.prototype.sayHi = function() {
+        console.log(`${this.name} say hi`)
+      }
+      let p = new Parent('d', 12)
+      console.log(p)
+      p.sayHi()
+      function Child(name,age,gender) {
+        Parent.call(this,name,age)
+        this.gender = gender
+      }
+      //Object.create返回新对象,带有指定的原型对象和属性
+      Child.prototype = Object.create(Parent.prototype)
+      Child.prototype.constructor = Child
+      Child.prototype.s = 13
+      let c = new Child('male',24,'male')
+      console.log(c);
+      c.sayHi()
+    </script> -->
+    <script>
+      function Parent(name) {
+        this.name = name
+      }
+      Parent.prototype.sayHi = function() {
+        console.log(`${name} say hi`)
+      }
+      let f = new Parent('f')
+      console.log(f);
+      
+      function Child(name,age){
+        Parent.call(this,name)
+        this.age = age
+      }
+      Child.prototype = Object.create(Parent.prototype)
+      Child.prototype.constructor = Child
+      let k = new Child('k',24)
+      console.log(k)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function F(name) {
+        this.name = name
+      }
+      F.prototype.s = function() {
+        console.log(`${this.name} s h`)
+      }
+      let k = new F('f')
+      console.log(k, k instanceof F)
+      function ins(l, r) {
+        // 手动实现instanceof,实际上就是去找原型链上有没有构造函数的原型对象
+        let _r = r.prototype
+        let _l = l.__proto__
+        while (true) {
+          if (_l === null) {
+            return false
+          }
+          if (_l === _r) {
+            return true
+          }
+          _l = _l.__proto__
+        }
+      }
+      let m = new Object()
+      console.log(ins(k, F))
+      console.log(ins(m, F))
+    </script>
+  </body>
+</html>

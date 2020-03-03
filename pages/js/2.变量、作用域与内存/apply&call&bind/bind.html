@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>bind区别在于，非立即执行，而是返回一个函数，改变当前函数的this指向</p>
+
+    <script>
+      var a = 3
+      let obj = {
+        a: 2
+      }
+      let fn = function() {
+        console.log(this.a)
+        console.log(arguments)
+      }
+      fn()
+      fn.bind(obj, 3)(2)
+      Function.prototype.myBind = function(ctx=window) {
+        ctx.fn = this
+        let args = [...arguments].slice(1)
+        return function(){
+          let allArgs = args.concat([...arguments])
+          console.log('allArgs===>',allArgs)
+          return allArgs.length?ctx.fn(...allArgs):ctx.fn()
+        }
+      }
+       fn.myBind(obj, 3)(2)
+    </script>
+  </body>
+</html>
