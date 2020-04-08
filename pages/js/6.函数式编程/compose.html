@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>compose 主要是实现了pointFree,将过程合并起来，无参数处理</p>
+    <script>
+      // let compose = (...args) => {
+      //   x => args.reduceRight((res, cb) => cb(res), x)
+      // }
+    </script>
+
+    <script>
+      let sum = x => (x + 10) * 3
+      let add = x => x + 10
+      let m = x => x * 3
+      let _compose = (...args) => x => args.reduce((res, cb) => cb(res), x)
+
+      let _c = _compose(add, m)
+    </script>
+  </body>
+</html>

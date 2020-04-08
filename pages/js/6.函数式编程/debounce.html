@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #container {
+        width: 300px;
+        height: 300px;
+        margin: 40px auto;
+        background: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Debounce函数是防止短时间内大量触发 -->
+    <div id="container"></div>
+    <input id="input_1" type="text" />
+    <script>
+      let _debounce = (fn, wait) => {
+        let timer = null
+        return function() {
+          if (timer) {
+            clearTimeout(timer)
+          }
+          timer = setTimeout(() => {
+            fn.apply(this, arguments)
+          }, wait)
+        }
+      }
+    </script>
+  
+    <script>
+      let _node = document.querySelector('#container')
+      let _input = document.querySelector('#input_1')
+      let count = 0
+      _node.onmousemove = _debounce(function() {
+        container.innerHTML = count++
+      }, 1000)
+      let logFn = function(e) {
+        console.log(e.target.value)
+      }
+      _input.oninput = _debounce(logFn, 1000)
+    </script>
+  </body>
+</html>

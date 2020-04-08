@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- map是对数组的每一项进项操作 -->
+    <script>
+      Array.prototype.myMap = function(cb) {
+        let newArr = []
+        for (let i = 0; i < this.length; i++) {
+          newArr.push(cb(this[i]))
+        }
+        return newArr
+      }
+      let arr = [1, 2, 3, 4, 5]
+      console.log(arr.map(item => item * 2))
+
+      console.log(arr.myMap(item => item * 2))
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function CtrFn() {
+        this.tasks = []
+        this.max = 10
+        setTimeout(() => {
+          this.run
+        }, 0)
+        CtrFn.prototype.addTask = function() {
+          this.tasks.push(task)
+        }
+        CtrFn.prototype.run = function() {
+          let _min = Math.min(this.tasks.length, max)
+          for (let i = 0; i < _min.length; i++) {
+            this.max--
+            let task = this.tasks.shift()
+            task
+              .then(res => console.log(res))
+              .catch(error => console.log(error))
+              .finally(() => {
+                this.max++
+                this.run()
+              })
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

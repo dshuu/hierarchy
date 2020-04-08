@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 发布订阅模式
+      class EventEmitter {
+        constructor() {
+          this._pool = {}
+        }
+        on(event, cb) {
+          this._pool[event] ? this._pool[event].push(cb) : (this._pool[event] = [cb])
+        }
+        emit(event, ...args) {
+          this._pool[event] && this._pool[event].forEach(f => f(...args))
+        }
+        off(event) {
+          if (this._pool[event]) {
+            delete this._pool[event]
+          }
+        }
+        once(event, cb) {
+          this.on(event, (...args) => {
+            cb(...args)
+            this.off(event)
+          })
+        }
+      }
+      let Bus = new EventEmitter()
+      Bus.on('c', () => {
+        console.log('ccc')
+      })
+      Bus.on('c', () => {
+        console.log('cccD')
+      })
+      setTimeout(() => {
+        Bus.emit('c')
+        Bus.off('c')
+      }, 3000)
+
+      setTimeout(() => {
+        Bus.emit('c')
+      }, 3000)
+    </script>
+  </body>
+</html>

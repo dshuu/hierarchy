@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Jsonp</title>
-</head>
+  </head>
 
-<body>
-    <script>
+  <body>
+    跨域是通过添加script的方式，绕开同源政策的影响，包括cb和数据
+    <!-- <script>
         (function () {
             let url = 'https://api.myjson.com/bins/12jvla'
 
@@ -28,7 +28,37 @@
                 console.log('info==>', info)
             }
         }())
+    </script> -->
+    <script>
+      let json2url = data =>
+        Object.keys(data)
+          .reduce((acc, cur) => {
+            console.log('acc===>', acc)
+            acc.push(`${cur}=${data[cur]}`)
+            return acc
+          }, [])
+          .join('&')
+      let _jsonp = function(obj = {}) {
+        let { url, data } = obj
+        if (!url) return
+        return new Promise((resolve, reject) => {
+          let cbFn = `jsonp_${Date.now()}`
+          data.cb = cbFn
+          let head = document.querySelector('head')
+          let _script = document.createElement('script')
+          _script.src = `${url}?${json2url(data)}`
+          head.appendChild(_script)
+          window[cbFn] = function(res) {
+            console.log('res===>', res)
+            res ? resolve(res) : reject('error')
+            head.removeChild(_script)
+            window[cbFn] = null
+          }
+        })
+      }
+      _jsonp({ url: 'http://127.0.0.1:7001/ping', data: { a: 1, b: 2 } }).then(resp => {
+        console.log('resp===>', resp,typeof resp)
+      })
     </script>
-</body>
-
+  </body>
 </html>

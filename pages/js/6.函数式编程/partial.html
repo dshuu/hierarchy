@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>偏函数是将n元函数，成为n-x元函数，用于减少函数调用</p>
+    <script>
+      function add(x, y, z) {
+        return x + y + z
+      }
+      let _partial = (fn, ...args) => (...laterArgs) => fn.apply(null,[...args, ...laterArgs])
+      let _f = _partial(add, 1)(2, 3)
+    </script>
+  </body>
+</html>

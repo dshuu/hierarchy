@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #container {
+        width: 300px;
+        height: 300px;
+        margin: 40px auto;
+        background: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Debounce函数是防止短时间内大量触发 -->
+    <div id="container"></div>
+    <input id="input_1" type="text" />
+    <script>
+      let _throttle = (fn, wait) => {
+        let run = true
+        return function() {
+          let that = this
+          let _arguments = arguments
+          if (!run) {
+            return
+          }
+          run = false
+          setTimeout(function(){
+            run = true
+            fn.apply(that, _arguments)
+          }, wait)
+        }
+      }
+    </script>
+
+    <script>
+      let _node = document.querySelector('#container')
+      let _input = document.querySelector('#input_1')
+      let count = 0
+      _node.onmousemove = _throttle(function() {
+        container.innerHTML = count++
+      }, 2000)
+      let logFn = function(e) {
+        console.log(e.target.value)
+      }
+      _input.oninput = _throttle(logFn, 2000)
+    </script>
+  </body>
+</html>

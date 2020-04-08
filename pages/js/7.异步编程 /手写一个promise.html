@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Promise {
+        constructor(fn) {
+          this.status = 'pending' //三种状态 pending,resolved,rejected
+          this.value = undefined //正常回调
+          this.reason = undefined //错误回调
+          try {
+            fn(
+              data => this.resolve(data),
+              err => this.reject(error)
+            )
+          } catch (error) {
+            this.reject(error)
+          }
+        }
+        resolve(value) {
+          if (this.status === 'pending') {
+            this.status = 'resolved'
+            this.value = value
+            this.onFullfilled(this.value)
+          }
+        }
+        reject(error) {
+          if (this.status === 'pending') {
+            this.reason = error
+            this.status = 'rejected'
+            this.onRejected(this.reason)
+          }
+        }
+        then(onFullfilled, onRejected) {
+          this.onFullfilled = onFullfilled
+          this.onRejected = onRejected
+          return this
+        }
+        static all(promises) {
+          return new Promise((res, rej) => {
+            console.log(promises)
+            let results = promises.map(item => {
+              return {
+                value: undefined,
+                isResolved: false
+              }
+            })
+            promises.forEach((item, index) => {
+              console.log(item)
+              item.then(
+                data => {
+                  results[index] = {
+                    value: data,
+                    isResolved: true
+                  }
+                  if (results.filter(e => !e.isResolved).length == 0) {
+                    res(results.map(k => k.value))
+                  }
+                },
+                error => {
+                  reject(error)
+                }
+              )
+            })
+          })
+        }
+        static race(promises){
+          return new Promise((res,rej)=>{
+            promises.forEach(item=>{
+              item.then(data=>{
+                res(data)
+              })
+            })
+          })
+        }
+      }
+    </script>
+    <script>
+      let p1 = new Promise((res, rej) => {
+        setTimeout(function() {
+          res(1)
+          console.log('p1')
+        }, 2000)
+      })
+      p1.then(data => {
+        console.log('data===>', data)
+      })
+      let p2 = new Promise((res, rej) => {
+        setTimeout(function() {
+          res(2)
+          console.log('p2')
+
+        }, 4000)
+      })
+      p2.then(data => {
+        console.log(data)
+      })
+      Promise.race([p1, p2]).then(data => {
+        console.log('data===>', data)
+      })
+    </script>
+  </body>
+</html>

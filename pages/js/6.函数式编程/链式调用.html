@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>链式调用，任务队列</p>
+    <script>
+      function _lazyMan(name) {
+        this.name = name || 'lm'
+        this.queue = []
+        this.queue.push(() => {
+          console.log(`this is ${this.name}`)
+          this.next()
+        })
+        setTimeout(() => {
+          this.next()
+        }, 0)
+      }
+      _lazyMan.prototype.next = function() {
+        let fn = this.queue.shift()
+        fn && fn()
+      }
+      _lazyMan.prototype.sleep = function(time) {
+        this.queue.push(() => {
+          setTimeout(() => {
+            console.log(`sleep ${time}`)
+            this.next()
+          }, time * 1000)
+        })
+        return this
+      }
+      _lazyMan.prototype.eat = function(food) {
+        this.queue.push(() => {
+          console.log(`eat ${food}`)
+          this.next()
+        })
+        return this
+      }
+      _lazyMan.prototype.sleepFirst = function(time) {
+        this.queue.unshift(() => {
+          console.log(`sleep fist ${time}`)
+          setTimeout(() => {
+            this.next()
+          }, time * 1000)
+        })
+        return this
+      }
+
+      let LazyMan = function(name) {
+        return new _lazyMan(name)
+      }
+      // 新实例本身没有构造函数的方法
+      // let LazyMan = new _lazyMan()
+      console.log('LazyMan==>', LazyMan)
+      LazyMan.sleepFirst(2).eat('dinner') // this is hank wake up after 2s Eat Dinner
+    </script>
+  </body>
+</html>

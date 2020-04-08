@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    函数柯里化,是将n个参数的函数转换成n个函数
+    <script>
+      const curry = (fn, arr = []) => (fn.length === arr.length ? fn(...arr) : (...args) => curry(fn, [...arr, ...args]))
+    </script>
+    <script>
+      function add(x, y) {
+        return x + y
+      }
+
+      const _curry = (fn, arr = []) => (fn.length === arr.length ? fn(...arr) : (...args) => _curry(fn, [...arr, ...args]))
+      let _add = curry((a, b) => a + b)
+    </script>
+
+    <script>
+      // 累加器
+      let lj = function(m) {
+        let tmp = function(n) {
+          return lj(m + n)
+        }
+        tmp.toString = function() {
+          return m
+        }
+        return tmp
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>reduce,reduceRight的用法和实现</p>
+    <p>reduce可以在函数外，传入默认值，如果没有，将把数组第一项作为默认值</p>
+    <script>
+      let arr = [1, 2, 3, 4, 5]
+      let i = arr.reduce((acc, cur) => {
+        console.log('acc==>', acc)
+        console.log('cur==>', cur)
+        return acc + cur
+      },100)
+      console.log(i)
+    </script>
+  </body>
+</html>
