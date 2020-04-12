@@ -87,20 +87,22 @@
           console.log('p1')
         }, 2000)
       })
-      p1.then(data => {
-        console.log('data===>', data)
-      })
+      // p1.then(data => {
+      //   console.log('data===>', data)
+      // })
       let p2 = new Promise((res, rej) => {
         setTimeout(function() {
           res(2)
           console.log('p2')
-
         }, 4000)
       })
-      p2.then(data => {
-        console.log(data)
-      })
-      Promise.race([p1, p2]).then(data => {
+      // p2.then(data => {
+      //   console.log('p2data==>',data)
+      // })
+      // Promise.race([p1, p2]).then(data => {
+      //   console.log('data===>', data)
+      // })
+      Promise.all([p1, p2]).then(data => {
         console.log('data===>', data)
       })
     </script>
