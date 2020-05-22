@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div></div>
+    <button>click me</button>
+    <script src="https://unpkg.com/@reactivex/rxjs@5/dist/global/Rx.min.js"></script>
+    <script>
+      var button = document.querySelector('button')
+      Rx.Observable.fromEvent(button, 'click')
+        .throttleTime(1000)
+        .scan((count) => count + 1, 0)
+        .subscribe((count) =>
+          console.log(`Clicked ${count} times`)
+        )
+    </script>
+  </body>
+</html>

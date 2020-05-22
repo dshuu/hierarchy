@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #canvas {
+        display: block;
+        margin: 30px auto;
+      }
+    </style>
+  </head>
+  <body onload="draw()">
+    <canvas width="600" height="450" id="canvas"></canvas>
+    <script>
+      function draw() {
+        var ctx = document
+          .getElementById('canvas')
+          .getContext('2d')
+        ctx.fillStyle = '#165c61'
+        ctx.fillRect(0, 0, 600, 450)
+        ctx.fillStyle = '#FFA500'
+        ctx.font = 'bold 80px serif'
+        ctx.textAlign = 'center'
+        ctx.fillText('Webpack', 300, 225)
+        const imgUrl = document
+          .getElementById('canvas')
+          .toDataURL('image/png')
+        const dlink = document.createElement('a')
+        dlink.download = 'donwload'
+        dlink.href = imgUrl
+        dlink.dataset.downloadurl = [
+          'image/png',
+          dlink.donwload,
+          dlink.href,
+        ].join('.')
+        // dlink.click()
+      }
+    </script>
+  </body>
+</html>

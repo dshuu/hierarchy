@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="input-upload-file" class="box-shadow">
+      <span>upload! (ღ˘⌣˘ღ)</span>
+      <input type="file" class="upload" id="fileUp" name="fileUpload" />
+    </div>
+    <pre id="infos"></pre>
+  </body>
+
+  <script>
+    var myVideos = [];
+
+    window.URL = window.URL || window.webkitURL;
+
+    document.getElementById('fileUp').onchange = setFileInfo;
+
+    function setFileInfo() {
+      var files = this.files;
+      myVideos.push(files[0]);
+      var video = document.createElement('video');
+      video.preload = 'metadata';
+
+      video.onloadedmetadata = function() {
+        // 解除对文件的内存保存关系
+        window.URL.revokeObjectURL(video.src);
+        var duration = video.duration;
+        myVideos[myVideos.length - 1].duration = duration;
+        updateInfos();
+      };
+
+      video.src = URL.createObjectURL(files[0]);
+    }
+
+    function updateInfos() {
+      var infos = document.getElementById('infos');
+      infos.textContent = '';
+      for (var i = 0; i < myVideos.length; i++) {
+        infos.textContent += myVideos[i].name + ' duration: ' + myVideos[i].duration + '\n';
+      }
+    }
+  </script>
+</html>
