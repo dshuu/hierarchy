@@ -17,7 +17,9 @@
   </head>
   <body onload="draw()">
     <canvas width="600" height="450" id="canvas"></canvas>
+    <button onclick="donwload()">下载</button>
     <script>
+      let dlink = null
       function draw() {
         var ctx = document
           .getElementById('canvas')
@@ -31,7 +33,7 @@
         const imgUrl = document
           .getElementById('canvas')
           .toDataURL('image/png')
-        const dlink = document.createElement('a')
+        dlink = document.createElement('a')
         dlink.download = 'donwload'
         dlink.href = imgUrl
         dlink.dataset.downloadurl = [
@@ -40,6 +42,11 @@
           dlink.href,
         ].join('.')
         // dlink.click()
+      }
+      function donwload() {
+        if (dlink) {
+          dlink.click()
+        }
       }
     </script>
   </body>

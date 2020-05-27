@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #canvas {
+        display: block;
+        margin: 30px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas width="500" height="500" id="canvas"></canvas>
+    <script>
+      window.onload = function() {
+        let ctx = document
+          .querySelector('#canvas')
+          .getContext('2d')
+        let imgObj = new Image()
+        imgObj.src = '../../assets/images/3.jpg'
+        imgObj.onload = function() {
+          ctx.drawImage(imgObj, 0, 0)
+          ctx.beginPath()
+          ctx.moveTo(30, 96)
+          ctx.lineTo(70, 66)
+          ctx.lineTo(103, 76)
+          ctx.lineTo(170, 15)
+          ctx.stroke()
+          // ctx.getImageData(0,0,500,500)
+        }
+      }
+    </script>
+  </body>
+</html>
