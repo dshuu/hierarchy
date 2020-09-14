@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promise</title>
+</head>
+
+<body>
+    <script>
+        console.log('1')
+
+        function fn(ms) {
+            return new Promise((res, rej) => {
+                setTimeout(res, ms, 'done');
+            })
+        }
+        fn(3000).then(resp=>{
+            console.log('resp==>',resp)
+        })
+        async function a(){
+            let info =  await fn(3000)
+            console.log('4')
+        }
+        a()
+        console.log('3')
+    </script>
+</body>
+
+</html>
