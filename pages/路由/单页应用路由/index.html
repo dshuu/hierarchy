@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>单页应用示例</h2>
+    <div id="app"></div>
+    <ul>
+      <li><a id="list" href="javascript:;">list</a></li>
+      <li><a id="detail" href="javascript:;">detail</a></li>
+    </ul>
+    <script>
+      const listNode = document.querySelector("#list"),
+        detailNode = document.querySelector("#detail"),
+        appNode = document.querySelector("#app");
+      const fn1 = function () {
+        appNode.appendChild(`
+        <ul>
+          <li>apple</li>  
+          <li>google</li>  
+        </ul>
+        `);
+      };
+      const fn2 = function () {
+        appNode.appendChild(`
+        detail info
+        `);
+      };
+      const routes = [
+        {
+          match: /\/list/,
+          route: fn1,
+        },
+        {
+          match: /\/detail/,
+          route: fn2,
+        },
+      ];
+      function matchRoute(routes, href) {
+        const page = routes.find((page) => page.match.test(href));
+        if (page) {
+        }
+      }
+      matchRoute(routes, window.location.href);
+    </script>
+  </body>
+</html>
