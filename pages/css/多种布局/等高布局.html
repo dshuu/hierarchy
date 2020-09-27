@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .parent {
+        width: 500px;
+        height: 150px;
+        margin: 20px 0;
+        background: #ccc;
+      }
+      .yellow {
+        background: yellow;
+      }
+      .green {
+        background: green;
+      }
+      .flex {
+        display: flex;
+        align-items: stretch;
+        /* 默认 */
+      }
+      .right-1 {
+        flex: 1;
+      }
+      .float{
+        overflow: hidden;
+      }
+      .left-2 {
+        float: left;
+        padding-bottom: 9999px;
+        margin-bottom: -9999px;
+      }
+      .right-2 {
+        overflow: hidden;
+        padding-bottom: 9999px;
+        margin-bottom: -9999px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent flex">
+      <div class="left-1 left yellow">
+        <p>leftleft</p>
+      </div>
+      <div class="right-1 right green">
+        <p>right</p>
+        <p>right</p>
+        <p>right</p>
+      </div>
+    </div>
+    <div class="parent float">
+      <div class="left-2 left yellow">
+        <p>leftleft</p>
+      </div>
+      <div class="right-2 right green">
+        <p>right</p>
+        <p>right</p>
+        <p>right</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -8,26 +8,26 @@
   </head>
   <body>
     <script>
-      console.log(a)
-      b()
-      console.log(c)
+      // console.log(a); //a为undefined
+      // b(); //函数不存在这种问题
+      // console.log(c);
 
-      var a = 123
-      function b() {
-        console.log('123')
-      }
-      let c = 123
+      // var a = 123;
+      // function b() {
+      //   console.log("123");
+      // }
+      // let c = 123;
 
       //变量提升，暂时性死区temportal dead zone
-      var tmp = 'tmp'
-      if (true) {
-        tmp = 'tmp1'
-        console.log(tmp)
-        let tmp
-        console.log(tmp)
-        tmp = 'tmp2'
-        console.log(tmp)
-      }
+      // var tmp = 'tmp'
+      // if (true) {
+      //   tmp = 'tmp1'
+      //   console.log(tmp)
+      //   let tmp
+      //   console.log(tmp)
+      //   tmp = 'tmp2'
+      //   console.log(tmp)
+      // }
     </script>
 
     <script>

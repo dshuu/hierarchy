@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 如何让a==1&&a==2成立
+      //  1.对象转原始类型优先级: Symbol.toPrimitive>valueOf>toString()
+      let a = {
+        value: 0,
+        toString: function () {
+          this.value++;
+          return this.value;
+        },
+      };
+      if (a == 1 && a == 2) {
+        console.log("yep it works");
+      }
+    </script>
+  </body>
+</html>

@@ -9,30 +9,38 @@
   <body>
     <p>防止混淆的话，记住[a]pply对应array</p>
     <script>
-      var a = 3
+      var a = 3;
       let obj = {
-        a: 2
-      }
-      let fn = function() {
-        console.log(this.a)
-        console.log('arguments==>', arguments)
-      }
-      fn()
+        a: 2,
+      };
+      let fn = function () {
+        console.log(this.a);
+      };
+      fn();
       // let fn1 = () => {
       //   console.log(this.a)
       // }
-      fn.apply(obj, [1, 2, 3])
-      Function.prototype.myApply = function(ctx = window) {
-        if (typeof this !== 'function') {
-          return new Error('Function required')
-        }
-        ctx.fn = this
-        let args = [...arguments].slice(1)[0]
-        let res = args.length ? ctx.fn(...args) : ctx.fn()
-        delete ctx.fn
-        return res
-      }
+      fn.apply(obj, [1, 2, 3]);
+
+      Function.prototype.myApply = function (ctx, args = []) {
+        ctx = ctx || window;
+        ctx.fn = this;
+        let result = ctx.fn(...args);
+        delete ctx.fn;
+        return result;
+      };
       fn.myApply(obj, [1, 2, 3])
+      // Function.prototype.myApply = function(ctx = window) {
+      //   if (typeof this !== 'function') {
+      //     return new Error('Function required')
+      //   }
+      //   ctx.fn = this
+      //   let args = [...arguments].slice(1)[0]
+      //   let res = args.length ? ctx.fn(...args) : ctx.fn()
+      //   delete ctx.fn
+      //   return res
+      // }
+      // fn.myApply(obj, [1, 2, 3])
     </script>
   </body>
 </html>

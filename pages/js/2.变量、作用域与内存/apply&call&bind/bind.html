@@ -10,26 +10,40 @@
     <p>bind区别在于，非立即执行，而是返回一个函数，改变当前函数的this指向</p>
 
     <script>
-      var a = 3
+      var a = 3,
+        b = 2,
+        c = 1;
       let obj = {
-        a: 2
-      }
-      let fn = function() {
-        console.log(this.a)
-        console.log(arguments)
-      }
-      fn()
-      fn.bind(obj, 3)(2)
-      Function.prototype.myBind = function(ctx=window) {
-        ctx.fn = this
-        let args = [...arguments].slice(1)
-        return function(){
-          let allArgs = args.concat([...arguments])
-          console.log('allArgs===>',allArgs)
-          return allArgs.length?ctx.fn(...allArgs):ctx.fn()
-        }
-      }
-       fn.myBind(obj, 3)(2)
+        a: 10,
+        b: 20,
+        c: 30,
+      };
+      let fn = function (a = 1, b = 1, c = 1) {
+        return this.a + this.b + this.c;
+      };
+      console.log(fn());
+      Function.prototype.myBind = function (ctx, ...args) {
+        console.log('args==>',args);
+        console.log('ctx==>',ctx);
+
+        let self = this;
+        let fn = function () {
+          self.apply(ctx, args);
+        };
+        fn.prototype = Object.create(this.prototype);
+        return fn;
+      };
+      let s = fn.myBind(obj);
+      // Function.prototype.myBind = function(ctx=window) {
+      //   ctx.fn = this
+      //   let args = [...arguments].slice(1)
+      //   return function(){
+      //     let allArgs = args.concat([...arguments])
+      //     console.log('allArgs===>',allArgs)
+      //     return allArgs.length?ctx.fn(...allArgs):ctx.fn()
+      //   }
+      // }
+      //  fn.myBind(obj, 3)(2)
     </script>
   </body>
 </html>

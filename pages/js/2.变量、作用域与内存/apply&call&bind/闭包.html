@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    闭包是有权访问另外一个函数作用域内变量的函数,常见的场景有:
+    <ol>
+      <li>返回一个函数</li>
+      <li>作为函数参数传递</li>
+      <li>在定时器、事件监听、Ajax等异步场景中，回调函数就是闭包</li>
+      <li>立即执行函数</li>
+    </ol>
+    <script>
+      // for (var a = 1; a < 10; a++) {
+      //   (function (a) {
+      //     setTimeout(function () {
+      //       console.log("a===>", a);
+      //     }, 1000);
+      //   })(a);
+      // }
+      for (let i = 0; i < 10; i++) {
+        setTimeout(function () {
+          console.log("i==>", i);
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>

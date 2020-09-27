@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .parent {
+        width: 500px;
+        height: 150px;
+        margin: 20px 0;
+        background: #ccc;
+      }
+      .yellow {
+        background: yellow;
+      }
+      .green {
+        background: green;
+      }
+      .left-1 {
+        float: left;
+        width: 100px;
+      }
+
+      .left-2 {
+        float: left;
+        width: 100px;
+      }
+      .right-1 {
+        margin-left: 100px;
+      }
+      .right-2 {
+        overflow: hidden;
+      }
+      .table {
+        display: table;
+        table-layout: fixed;
+      }
+      .left-3 {
+        display: table-cell;
+        width: 100px;
+      }
+      .right-3 {
+        display: table-cell;
+      }
+      .flex {
+        display: flex;
+      }
+      .left-4 {
+        width: 100px;
+        margin-right: 20px;
+      }
+      .right-4 {
+        /* flex: 1; */
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 两列布局，一边定宽，一边自适应 -->
+    <div class="parent">
+      <div class="left-1 left yellow">
+        <p>left</p>
+      </div>
+      <div class="right-1 right green">
+        <p>right</p>
+        <p>right</p>
+        <p>right</p>
+      </div>
+    </div>
+    <!-- BFC -->
+    <div class="parent">
+      <div class="left-2 left yellow">
+        <p>left</p>
+      </div>
+      <div class="right-2 right green">
+        <p>right</p>
+        <p>right</p>
+        <p>right</p>
+      </div>
+    </div>
+
+    <!-- table -->
+    <div class="parent table">
+      <div class="left-3 left yellow">
+        <p>left</p>
+      </div>
+      <div class="right-3 right green">
+        <p>right</p>
+        <p>right</p>
+        <p>right</p>
+      </div>
+    </div>
+    <div class="parent flex">
+      <div class="left-4 left yellow">
+        <p>left</p>
+      </div>
+      <div class="right-4 right green">
+        <p>right</p>
+        <p>right</p>
+        <p>right</p>
+      </div>
+    </div>
+  </body>
+</html>

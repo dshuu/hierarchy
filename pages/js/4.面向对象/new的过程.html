@@ -15,31 +15,26 @@
       <li>如果该函数没有返回对象，返回this</li>
     </ol>
     <script>
-      function Person(name) {
-        this.name = name
+      function Person(name, job) {
+        this.name = name;
+        this.job = job;
       }
-      let f = new Person('xm')
-      console.log(f)
-      function N(f) {
-        return function() {
-          let o = {}
-          o.__proto__ = f.prototype
-          f.apply(o, [...arguments])
-          return o
-        }
-      }
-      let k = N(Person)('k')
-      console.log(k)
+      Person.prototype.sayHi = function () {
+        console.log(`${this.name} say hi`);
+      };
+      function New1(Fn, ...args) {
+        console.log("args==>", args);
+        let obj = new Object();
+        obj.__proto__ = Object.create(Fn.prototype);
+        let res = Fn.apply(obj, args);
+        console.log("res==>", res);
+        let isObjecrt = toString.call(res) === "[object Object]",
+          isFunction = typeof res === "function";
 
-      function Ne(P) {
-        return function() {
-          let obj = {}
-          obj.__proto__ = P.prototype
-          P.apply(obj,[...arguments])
-          return obj
-        }
+        return isObjecrt || isFunction ? res : obj;
       }
-      console.log(Ne(Person)('mm'))
+      let s = New1(Person, "dd", "cc");
+      console.log(s);
     </script>
   </body>
 </html>

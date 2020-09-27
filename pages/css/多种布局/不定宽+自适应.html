@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .parent {
+        width: 500px;
+        height: 150px;
+        margin: 20px 0;
+        background: #ccc;
+      }
+      .yellow {
+        background: yellow;
+      }
+      .green {
+        background: green;
+      }
+      .left-1 {
+        float: left;
+      }
+      .right-1 {
+        overflow: hidden;
+      }
+      .table {
+        display: table;
+      }
+      .left-2 {
+        width: 1px;
+        padding-right: 20px;
+        display: table-cell;
+      }
+      .right-2 {
+        display: table-cell;
+      }
+      .flex {
+        display: flex;
+      }
+      .left-3 {
+        margin-right: 20px;
+      }
+      .right-3 {
+        flex-grow: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      <div class="left-1 left yellow">
+        <p>leftleft</p>
+      </div>
+      <div class="right-1 right green">
+        <p>right</p>
+        <p>right</p>
+        <p>right</p>
+      </div>
+    </div>
+    <!-- table -->
+    <div class="table parent">
+      <div class="left-2 left yellow">
+        <p>leftleft</p>
+      </div>
+      <div class="right-2 right green">
+        <p>right</p>
+        <p>right</p>
+        <p>right</p>
+      </div>
+    </div>
+    <!-- flex -->
+    <div class="flex parent">
+      <div class="left-3 left yellow">
+        <p>leftleft</p>
+      </div>
+      <div class="right-3 right green">
+        <p>right</p>
+        <p>right</p>
+        <p>right</p>
+      </div>
+    </div>
+  </body>
+</html>

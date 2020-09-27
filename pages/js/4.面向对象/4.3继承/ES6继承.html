@@ -9,27 +9,28 @@
   <body>
     <script>
       class Parent {
-        constructor(name) {
-          this.name = name
+        constructor(name, job) {
+          this.name = name;
+          this.job = job;
         }
         sayHi() {
-          console.log(`${this.name} say hi`)
+          console.log(`${this.name} say hi`);
         }
       }
-      let f = new Parent('f')
-      console.log(f)
+      let f = new Parent("f");
+      console.log(f);
 
       class Child extends Parent {
-        constructor(name, age) {
-          super(name)
-          this.age = age
+        constructor(name, age, job) {
+          super(name,job);
+          this.age = age;
         }
         s() {
-          console.log('ssss')
+          console.log("ssss");
         }
       }
-      let k = new Child('k', 24)
-      console.log(k)
+      let k = new Child("k", 24, "doctor");
+      console.log(k);
     </script>
   </body>
 </html>

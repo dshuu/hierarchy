@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .parent {
+        margin: 20px 0;
+        width: 300px;
+        background: green;
+        height: 150px;
+      }
+      .child {
+        background: gray;
+        width: 30px;
+        height: 30px;
+      }
+
+      .parent-1 {
+        display: table-cell;
+        vertical-align: middle;
+      }
+      .child-1 {
+        margin: 0 auto;
+      }
+      .parent-2 {
+        position: relative;
+      }
+      .child-2 {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .parent-3 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- table-cell+vertical-align -->
+    <div class="parent-1 parent">
+      <div class="child-1 child"></div>
+    </div>
+
+    <div class="parent-2 parent">
+      <div class="child-2 child"></div>
+    </div>
+
+    <div class="parent-3 parent">
+      <div class="child-3 child"></div>
+    </div>
+  </body>
+</html>

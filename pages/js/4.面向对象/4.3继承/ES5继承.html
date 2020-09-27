@@ -7,47 +7,30 @@
     <title>Document</title>
   </head>
   <body>
-    <!-- <script>
-      function Parent(name, age) {
-        this.name = name
-        this.age = age
-      }
-      Parent.prototype.sayHi = function() {
-        console.log(`${this.name} say hi`)
-      }
-      let p = new Parent('d', 12)
-      console.log(p)
-      p.sayHi()
-      function Child(name,age,gender) {
-        Parent.call(this,name,age)
-        this.gender = gender
-      }
-      //Object.create返回新对象,带有指定的原型对象和属性
-      Child.prototype = Object.create(Parent.prototype)
-      Child.prototype.constructor = Child
-      Child.prototype.s = 13
-      let c = new Child('male',24,'male')
-      console.log(c);
-      c.sayHi()
-    </script> -->
+    <div>先想清楚 new被调用后做了什么</div>
+    <ol>
+      <li>实例可以访问到私有属性</li>
+      <li>实例可以访问到构造函数原型链上属性</li>
+      <li>如果构造函数结果不是引用类型</li>
+    </ol>
     <script>
       function Parent(name) {
-        this.name = name
+        this.name = name;
       }
-      Parent.prototype.sayHi = function() {
-        console.log(`${name} say hi`)
-      }
-      let f = new Parent('f')
+      Parent.prototype.sayHi = function () {
+        console.log(`${this.name} say hi`);
+      };
+      let f = new Parent("f");
       console.log(f);
-      
-      function Child(name,age){
-        Parent.call(this,name)
-        this.age = age
+
+      function Child(name, age) {
+        Parent.call(this, name);
+        this.age = age;
       }
-      Child.prototype = Object.create(Parent.prototype)
-      Child.prototype.constructor = Child
-      let k = new Child('k',24)
-      console.log(k)
+      Child.prototype = Object.create(Parent.prototype);
+      Child.prototype.constructor = Child;
+      let k = new Child("k", 24);
+      console.log(k);
     </script>
   </body>
 </html>
