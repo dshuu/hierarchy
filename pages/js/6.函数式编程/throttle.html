@@ -19,34 +19,47 @@
     <div id="container"></div>
     <input id="input_1" type="text" />
     <script>
+      // let _throttle = (fn, wait) => {
+      //   let run = true
+      //   return function() {
+      //     let that = this
+      //     let _arguments = arguments
+      //     if (!run) {
+      //       return
+      //     }
+      //     run = false
+      //     setTimeout(function(){
+      //       run = true
+      //       fn.apply(that, _arguments)
+      //     }, wait)
+      //   }
+      // }
       let _throttle = (fn, wait) => {
-        let run = true
-        return function() {
-          let that = this
-          let _arguments = arguments
+        let run = true;
+        return function (...args) {
           if (!run) {
-            return
+            return;
           }
-          run = false
-          setTimeout(function(){
-            run = true
-            fn.apply(that, _arguments)
-          }, wait)
-        }
-      }
+          run = false;
+          setTimeout(() => {
+            run = true;
+            fn.apply(this, ...args);
+          },wait);
+        };
+      };
     </script>
 
     <script>
-      let _node = document.querySelector('#container')
-      let _input = document.querySelector('#input_1')
-      let count = 0
-      _node.onmousemove = _throttle(function() {
-        container.innerHTML = count++
-      }, 2000)
-      let logFn = function(e) {
-        console.log(e.target.value)
-      }
-      _input.oninput = _throttle(logFn, 2000)
+      let _node = document.querySelector("#container");
+      let _input = document.querySelector("#input_1");
+      let count = 0;
+      _node.onmousemove = _throttle(function () {
+        container.innerHTML = count++;
+      }, 2000);
+      let logFn = function (e) {
+        console.log(e.target.value);
+      };
+      _input.oninput = _throttle(logFn, 2000);
     </script>
   </body>
 </html>

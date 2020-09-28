@@ -8,29 +8,35 @@
   </head>
   <body>
     函数柯里化,是将n个参数的函数转换成n个函数
+
     <script>
-      const curry = (fn, arr = []) => (fn.length === arr.length ? fn(...arr) : (...args) => curry(fn, [...arr, ...args]))
-    </script>
-    <script>
-      function add(x, y) {
-        return x + y
+      // 实现一个add add(1)(2)(3)=6
+      function add() {
+        let args = Array.prototype.slice.call(arguments);
+        let _adder = function () {
+          args.push(...arguments);
+          return _adder;
+        };
+        _adder.toString = function () {
+          return args.reduce((acc, cur) => {
+            return acc + cur;
+          });
+        };
+        return _adder;
       }
-
-      const _curry = (fn, arr = []) => (fn.length === arr.length ? fn(...arr) : (...args) => _curry(fn, [...arr, ...args]))
-      let _add = curry((a, b) => a + b)
     </script>
-
+    <script></script>
     <script>
       // 累加器
-      let lj = function(m) {
-        let tmp = function(n) {
-          return lj(m + n)
-        }
-        tmp.toString = function() {
-          return m
-        }
-        return tmp
-      }
+      // let lj = function(m) {
+      //   let tmp = function(n) {
+      //     return lj(m + n)
+      //   }
+      //   tmp.toString = function() {
+      //     return m
+      //   }
+      //   return tmp
+      // }
     </script>
   </body>
 </html>

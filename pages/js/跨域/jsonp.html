@@ -9,27 +9,34 @@
 
   <body>
     跨域是通过添加script的方式，绕开同源政策的影响，包括cb和数据
-    <!-- <script>
-        (function () {
-            let url = 'https://api.myjson.com/bins/12jvla'
 
-            function addScript(src) {
-                let _script = document.createElement('script')
-                _script.setAttribute('type', 'text/javascript')
-                _script.src = src
-                document.body.appendChild(_script)
-            }
-            window.onload = function() {
-                let _url = `${url}?callback=foo`
-                addScript(_url)
-            }
-
-            function foo(info) {
-                console.log('info==>', info)
-            }
-        }())
-    </script> -->
     <script>
+      function json2url(data) {
+        return Object.keys(data)
+          .reduce((acc, cur) => {
+            acc.push(`${cur}=${data[cur]}`);
+            return acc;
+          }, [])
+          .join("&");
+      }
+      function jsonp(url, data) {
+        return new Promise((res, rej) => {
+          const cbFn = `jsonp_${Date.now()}`;
+          data.cb = cbFn;
+          let _url = `${url}?${json2url(data)}`;
+          let _script = document.createElement("script");
+          _script.setAttribute("src", _url);
+          document.body.appendChild(_script);
+          window[cbFn] = function (result) {
+            result ? res(result) : rej("error");
+            document.body.removeChild(_script);
+            window[cbFn] = undefined;
+          };
+        });
+      }
+    </script>
+
+    <!-- <script>
       let json2url = data =>
         Object.keys(data)
           .reduce((acc, cur) => {
@@ -59,6 +66,6 @@
       _jsonp({ url: 'http://127.0.0.1:7001/ping', data: { a: 1, b: 2 } }).then(resp => {
         console.log('resp===>', resp,typeof resp)
       })
-    </script>
+    </script> -->
   </body>
 </html>
