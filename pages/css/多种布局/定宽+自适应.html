@@ -25,6 +25,7 @@
       .left-2 {
         float: left;
         width: 100px;
+        margin-right: 20px;
       }
       .right-1 {
         margin-left: 100px;
@@ -39,6 +40,7 @@
       .left-3 {
         display: table-cell;
         width: 100px;
+        /* table不加宽度，会根据内容影响 */
       }
       .right-3 {
         display: table-cell;
@@ -54,7 +56,8 @@
         /* flex: 1; */
         flex-grow: 1;
         flex-shrink: 1;
-        flex-basis: auto;
+        flex-basis: 0;
+        /* 初始长度 */
       }
     </style>
   </head>

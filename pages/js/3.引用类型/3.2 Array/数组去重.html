@@ -8,26 +8,30 @@
   </head>
   <body>
     <ul>
-      <li>Array.from new Set()</li>
+      <li>创建新数组，双重遍历</li>
+      <li>Set属性(需要注意NaN!==NaN)</li>
+      <li>hash去重(key唯一，Object、Map均可)</li>
     </ul>
-
     <script>
-      let arr = [1, 2, 3, 4, 1, 2, 5, 6, 7, 5]
-      console.log(Array.from(new Set(arr)))
+      function unique1(arr) {
+        return arr.reduce((prev, cur, index) => {
+          !prev.includes(cur) && prev.push(cur);
+          return prev;
+        }, []);
+      }
     </script>
     <script>
-      let qc0 = arr => {
-        let newArr = []
-        for (let i = 0; i < arr.length; i++) {
-          if (newArr.some(item => item == arr[i])) {
-            continue
-          }
-          newArr.push(arr[i])
-        }
-        return newArr
+      function unique2(arr) {
+        let nArr = arr.filter((i) => i !== i);
+        return [...new Set(arr.filter((i) => i === i)), ...nArr];
       }
-      console.log(qc0(arr));
-      
+    </script>
+    <script>
+      function unique3(arr) {
+        const map = new Map();
+        // 这个也存在NaN的问题
+        return arr.filter((i) => !map.has(i) && map.set(i, true));
+      }
     </script>
   </body>
 </html>
