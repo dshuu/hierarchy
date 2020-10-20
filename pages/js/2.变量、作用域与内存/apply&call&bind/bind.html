@@ -23,12 +23,9 @@
       };
       console.log(fn());
       Function.prototype.myBind = function (ctx, ...args) {
-        console.log('args==>',args);
-        console.log('ctx==>',ctx);
-
         let self = this;
-        let fn = function () {
-          self.apply(ctx, args);
+        let fn = function (...args1) {
+          self.apply(ctx, args.concat(args1));
         };
         fn.prototype = Object.create(this.prototype);
         return fn;

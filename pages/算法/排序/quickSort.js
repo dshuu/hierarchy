@@ -4,18 +4,18 @@
  */
 function quickSort(arr = []) {
   if (!arr.length) {
-    return []
+    return [];
   }
   let pivotIndex = Math.floor(arr.length / 2),
     pivot = arr.splice(pivotIndex, 1)[0],
     left = [],
-    right = []
+    right = [];
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] < pivot) {
-      left.push(arr[i])
+      left.push(arr[i]);
     } else {
-      right.push(arr[i])
+      right.push(arr[i]);
     }
   }
-  return quickSort(left).concat([pivot], quickSort(right))
+  return quickSort(left).concat([pivot], quickSort(right));
 }

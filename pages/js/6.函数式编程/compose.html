@@ -15,12 +15,12 @@
     </script>
 
     <script>
-      let sum = x => (x + 10) * 3
-      let add = x => x + 10
-      let m = x => x * 3
-      let _compose = (...args) => x => args.reduce((res, cb) => cb(res), x)
-
-      let _c = _compose(add, m)
+      let sum = (x) => (x + 10) * 3;
+      let add = (x) => x + 10;
+      let m = (x) => x * 3;
+      let _c = _compose(sun, add, m);
+      let compose = (...args) => (x) =>
+        args.reduceRight((res, cb) => cb(res), x);
     </script>
   </body>
 </html>

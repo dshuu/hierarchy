@@ -9,7 +9,7 @@
   <body>
     函数柯里化,是将n个参数的函数转换成n个函数
 
-    <script>
+    <!-- <script>
       // 实现一个add add(1)(2)(3)=6
       function add() {
         let args = Array.prototype.slice.call(arguments);
@@ -24,8 +24,17 @@
         };
         return _adder;
       }
+    </script> -->
+    <script>
+      function currying(fn, ...args) {
+        if (fn.length >= args.length) {
+          return fn(...args);
+        }
+        return function (...args2) {
+          return curring(fn, ...args, ...args2);
+        };
+      }
     </script>
-    <script></script>
     <script>
       // 累加器
       // let lj = function(m) {
