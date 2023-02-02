@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 由于JS的双精度值设定，超出精度的数字将会丢失精度。 典型问题 0.1+0.2===0.3
+    是错误的，因为0.1和0.2用二进制表达都是无理数，最后精度部分会丢失，那么怎么做大数字的加发？ -->
+
+    <script>
+      function BigIntAdd(str1, str2) {
+        let flag = 0,
+          finalStr = []
+        const length1 = str1.length
+        const length2 = str2.length
+        const maxLength = Math.max(length1, length2)
+        for (let i = 0; i < maxLength; i++) {
+          let n1 = 0,
+            n2 = 0
+          if (length1 > i) {
+            n1 = Number(str1.slice(length1 - i - 1, length1 - i))
+          }
+          if (length2 > i) {
+            n2 = Number(str2.slice(length2 - i - 1, length2 - i))
+          }
+          const result = n1 + n2 + flag
+          flag = result >= 10 ? 1 : 0
+          finalStr.push(result % 10)
+        }
+        return finalStr.reverse().join('')
+      }
+    </script>
+  </body>
+</html>

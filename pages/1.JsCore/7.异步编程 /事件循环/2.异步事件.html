@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 参考资料:http://lynnelv.github.io/js-event-loop-browser -->
+    浏览器环境下的js是单线程，从最简单的同步代码来看，就是入栈出栈。
+    但是js中并不是所有的事件都会是同步，典型的比如setTimeout就不会等倒计时结束后再执行。
+    macrotask：包含执行整体的js代码，事件回调，XHR回调，定时器（setTimeout/setInterval/setImmediate），IO操作，UI
+    render
+    microtask：更新应用程序状态的任务，包括promise回调，MutationObserver，process.nextTick，Object.observe
+    <ul>
+      <li>1.macrotask队列不为空？2:3</li>
+      <li>执行macrotask中的一个任务</li>
+      <li>检查microtask的队列不为空？4:5</li>
+      <li>取microtask的任务执行</li>
+      <li>render</li>
+    </ul>
+    <div>
+      其中需要注意的是RAF并不是严格按照60帧的策略执行，requestAnimationFrame回调的执行时机是在一次或多次事件循环的UI
+      render阶段。
+    </div>
+    <script>
+      setTimeout(function () {
+        console.log('timer1')
+      }, 0)
+
+      requestAnimationFrame(function () {
+        console.log('requestAnimationFrame')
+      })
+
+      setTimeout(function () {
+        console.log('timer2')
+      }, 0)
+
+      new Promise(function executor(resolve) {
+        console.log('promise 1')
+        resolve()
+        console.log('promise 2')
+      }).then(function () {
+        console.log('promise then')
+      })
+      console.log('end')
+    </script>
+  </body>
+</html>

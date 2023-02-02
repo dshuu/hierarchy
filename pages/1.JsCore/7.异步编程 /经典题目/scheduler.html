@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Scheduler {
+        limit = 2
+        active = -1
+        queue = []
+        constructor() {}
+        add(fn) {
+          this.queue.push(fn)
+          this.run()
+        }
+        run() {
+          if (
+            this.active === this.limit - 1 ||
+            !this.queue.length ||
+            this.active + 1 >= this.queue.length
+          )
+            return
+          this.active++
+          const index = this.active
+          if (!this.queue[index]) {
+            console.log('index==>', index, this.queue.length)
+          }
+          this.queue[index]().then(() => {
+            this.queue.shift()
+            this.active--
+            this.run()
+            return Promise.resolve()
+          })
+        }
+      }
+      const timeout = (time) =>
+        new Promise((resolve) => {
+          setTimeout(resolve, time)
+        })
+
+      const scheduler = new Scheduler()
+      const addTask = (time, order) => {
+        scheduler.add(() => timeout(time).then(() => console.log(order)))
+        // scheduler.add(() => timeout(time))
+      }
+
+      // 限制同一时刻只能执行2个task
+      addTask(4000, '1')
+      addTask(3500, '2')
+      addTask(4000, '3')
+      addTask(3000, '4')
+      //Scheduler ？
+      //4秒后打印1
+      //3.5秒打印2
+      //3进入队列，到7.5秒打印3
+      //...
+    </script>
+  </body>
+</html>
